@@ -1,22 +1,42 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
-    WebDriver driver;
 
-    By username = By.xpath("//input[@placeholder='Username']");
-    By password = By.xpath("//input[@placeholder='Password']");
-    By loginBtn = By.xpath("//button[@type='submit']");
+    WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    public void login(String user, String pass) {
-        driver.findElement(username).sendKeys(user);
-        driver.findElement(password).sendKeys(pass);
-        driver.findElement(loginBtn).click();
+    // Close initial login popup
+    @FindBy(xpath = "//span[@class='commonModal__close']")
+    WebElement closePopup;
+
+    // Search button
+    @FindBy(xpath = "//a[text()='Search']")
+    WebElement searchBtn;
+
+    // After search → OKAY GOT IT popup
+    @FindBy(xpath = "//button[text()='OKAY, GOT IT!']")
+    WebElement okGotItBtn;
+
+
+    // ===================== METHODS =======================
+
+    public void closeInitialPopup() {
+        try { closePopup.click(); } catch (Exception e) {}
+    }
+
+    public void clickSearch() {
+        searchBtn.click();
+    }
+
+    public void clickOkayGotIt() {
+        try { okGotItBtn.click(); } catch (Exception e) {}
     }
 }
