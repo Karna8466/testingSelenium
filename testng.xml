@@ -2,7 +2,7 @@
 <suite name="HybridFrameworkSuite">
     <test name="SmokeTests">
         <classes>
-            <class name="testcases.LoginTest" />
+            <class name="testcases.FlightDetailsTest" />
         </classes>
     </test>
 </suite>
